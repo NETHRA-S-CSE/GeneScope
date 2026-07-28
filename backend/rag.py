@@ -25,6 +25,16 @@ db = Chroma(
     embedding_function=embedding
 )
 
+import os
+
+print("=" * 50)
+print("Current working directory:", os.getcwd())
+print("Current files:", os.listdir("."))
+print("chroma_db exists:", os.path.exists("chroma_db"))
+print("knowledge_base exists:", os.path.exists("knowledge_base"))
+print("Vector count:", db._collection.count())
+print("=" * 50)
+
 retriever = db.as_retriever(
     search_type="mmr",
     search_kwargs={
