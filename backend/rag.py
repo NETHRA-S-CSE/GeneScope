@@ -89,16 +89,15 @@ def ask_genescope(question: str):
 
     for doc in docs:
         source = (
-        os.path.basename(doc.metadata["source"]),
-        doc.metadata["page"] + 1
-    )
-
-    if source not in seen:
-        seen.add(source)
-        sources.append({
-            "file": source[0],
-            "page": source[1]
-        })
+            os.path.basename(doc.metadata["source"]),
+            doc.metadata.get("page", 0) + 1
+        )
+        if source not in seen:
+            seen.add(source)
+            sources.append({
+                "file": source[0],
+                "page": source[1]
+            })
 
     return {
         "answer": response.content,
