@@ -1,98 +1,76 @@
 @import "tailwindcss";
 
 @layer base {
+  :root {
+    --bg: #faf7fb;
+    --bg-secondary: #f3eef8;
+    --surface: rgba(255, 255, 255, 0.7);
+    --surface-border: rgba(180, 120, 200, 0.2);
+    --text-primary: #1a0a2e;
+    --text-secondary: #6b4f8a;
+    --text-muted: #a08ab8;
+    --accent: #c2185b;
+    --accent-soft: #e91e8c;
+    --accent-muted: rgba(194, 24, 91, 0.12);
+    --accent-border: rgba(194, 24, 91, 0.25);
+    --purple: #7c3aed;
+    --purple-muted: rgba(124, 58, 237, 0.1);
+  }
+
+  .dark {
+    --bg: #0d0818;
+    --bg-secondary: #130d22;
+    --surface: rgba(25, 15, 45, 0.7);
+    --surface-border: rgba(180, 100, 220, 0.15);
+    --text-primary: #f0eaf8;
+    --text-secondary: #c4a8e0;
+    --text-muted: #7a5fa0;
+    --accent: #e91e8c;
+    --accent-soft: #ff4da6;
+    --accent-muted: rgba(233, 30, 140, 0.12);
+    --accent-border: rgba(233, 30, 140, 0.25);
+    --purple: #a855f7;
+    --purple-muted: rgba(168, 85, 247, 0.1);
+  }
+
   body {
-    background-color: #0a0512;
-    color: #f8f9fa;
+    background-color: var(--bg);
+    color: var(--text-primary);
     overflow-x: hidden;
+    transition: background-color 0.3s, color 0.3s;
   }
 }
 
-/* Custom Scrollbar - CyraSync Glow */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--accent-border); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+.glass {
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--surface-border);
 }
 
-::-webkit-scrollbar-track {
-  background: rgba(10, 5, 18, 0.9);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 45, 117, 0.4);
-  border-radius: 9999px;
-  box-shadow: 0 0 10px rgba(255, 45, 117, 0.5);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 45, 117, 0.7);
-}
-
-/* Custom CyraSync Glassmorphism Utility */
-.glass-panel {
-  background: rgba(22, 12, 38, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 45, 117, 0.28);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-}
-
-.glass-panel-glow {
-  background: rgba(28, 15, 48, 0.85);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 45, 117, 0.45);
-  box-shadow: 0 0 40px -5px rgba(255, 45, 117, 0.35);
-}
-
-/* Custom Shadow Utility Classes */
-.shadow-cyra-glow {
-  box-shadow: 0 0 30px -5px rgba(255, 45, 117, 0.45);
-}
-
-.shadow-cyra-purple {
-  box-shadow: 0 0 30px -5px rgba(157, 78, 223, 0.45);
-}
-
-.shadow-cyra-card {
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-}
-
-/* Markdown styling in chat response - CyraSync Palette */
-.prose-cyra p {
-  margin-bottom: 0.75rem;
-  line-height: 1.65;
-}
-
-.prose-cyra ul, .prose-cyra ol {
-  margin-top: 0.5rem;
-  margin-bottom: 0.75rem;
-  padding-left: 1.25rem;
-}
-
-.prose-cyra li {
-  margin-bottom: 0.35rem;
-}
-
-.prose-cyra strong {
-  color: #ff4d8d;
-  font-weight: 600;
-}
-
-.prose-cyra code {
-  background: rgba(199, 125, 255, 0.2);
-  color: #c77dff;
-  padding: 0.15rem 0.4rem;
+.prose-gs p { margin-bottom: 0.65rem; line-height: 1.7; }
+.prose-gs ul, .prose-gs ol { margin: 0.4rem 0 0.65rem; padding-left: 1.2rem; }
+.prose-gs li { margin-bottom: 0.3rem; }
+.prose-gs strong { color: var(--accent); font-weight: 600; }
+.prose-gs code {
+  background: var(--purple-muted);
+  color: var(--purple);
+  padding: 0.1rem 0.35rem;
   border-radius: 0.25rem;
-  font-size: 0.875em;
-  border: 1px solid rgba(199, 125, 255, 0.3);
+  font-size: 0.85em;
 }
 
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 0.85; transform: scale(1.08); }
-}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.animate-fadeIn { animation: fadeIn 0.2s ease-out; }
 
-.animate-pulse-glow {
-  animation: pulseGlow 4s ease-in-out infinite;
+.line-clamp-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
